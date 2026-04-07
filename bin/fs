@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require_relative "../lib/aubergine_machine"
+
+options = {
+  root: AubergineMachine::VirtualFilesystem.default_root
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: bin/fs [options] COMMAND [args]"
+
+  opts.on("--root PATH", String, "Guest filesystem root") do |value|
+    options[:root] = value
+  end
+end
+
+parser.order!
+
+command = ARGV.shift
+filesystem = AubergineMachine::VirtualFilesystem.new(root: options[:root])
+
+case command
+when "list"
+  path = ARGV.shift || "."
+  puts filesystem.list(path)
+when "read"
+  path = ARGV.shift or abort("read requires a path")
+  print filesystem.read(path)
+when "write"
+  path = ARGV.shift or abort("write requires a path")
+  content = ARGV.join(" ")
+  abort("write requires content") if content.empty?
+  filesystem.write(path, content)
+  puts "wrote #{path}"
+when "mkdir"
+  path = ARGV.shift or abort("mkdir requires a path")
+  filesystem.mkdir(path)
+  puts "created #{path}"
+when "delete"
+  path = ARGV.shift or abort("delete requires a path")
+  filesystem.delete(path)
+  puts "deleted #{path}"
+when "root"
+  puts filesystem.root
+else
+  warn parser.to_s
+  warn
+  warn "Commands: list [path], read PATH, write PATH TEXT, mkdir PATH, delete PATH, root"
+  exit 1
+end

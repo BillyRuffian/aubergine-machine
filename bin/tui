@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require_relative "../lib/aubergine_machine"
+
+options = {
+  columns: 40,
+  rows: 25,
+  paused: false
+}
+
+OptionParser.new do |parser|
+  parser.banner = "Usage: bin/tui [options]"
+
+  parser.on("--columns N", Integer, "Terminal width in columns") do |value|
+    options[:columns] = value
+  end
+
+  parser.on("--rows N", Integer, "Terminal height in rows") do |value|
+    options[:rows] = value
+  end
+
+  parser.on("--paused", "Start the machine paused") do
+    options[:paused] = true
+  end
+end.parse!
+
+computer = AubergineMachine::Computer.new(
+  columns: options[:columns],
+  rows: options[:rows]
+)
+
+AubergineMachine::TUI.new(
+  computer:,
+  start_paused: options[:paused]
+).run

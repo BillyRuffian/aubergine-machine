@@ -1,0 +1,6 @@
+.codex
+.ruby-lsp/
+.rspec_status
+
+guest_fs/*
+!guest_fs/.gitkeep

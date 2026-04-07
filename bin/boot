@@ -1,0 +1,66 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require_relative "../lib/aubergine_machine"
+
+options = {
+  columns: 40,
+  rows: 25,
+  instructions: 512,
+  input: nil,
+  input_instructions: 128
+}
+
+OptionParser.new do |parser|
+  parser.banner = "Usage: bin/boot [options]"
+
+  parser.on("--columns N", Integer, "Terminal width in columns") do |value|
+    options[:columns] = value
+  end
+
+  parser.on("--rows N", Integer, "Terminal height in rows") do |value|
+    options[:rows] = value
+  end
+
+  parser.on("--instructions N", Integer, "Instructions to run before rendering") do |value|
+    options[:instructions] = value
+  end
+
+  parser.on("--input TEXT", String, "Queue guest input after boot and run the monitor loop") do |value|
+    options[:input] = value
+  end
+
+  parser.on("--input-instructions N", Integer, "Instructions to run after queuing guest input") do |value|
+    options[:input_instructions] = value
+  end
+end.parse!
+
+computer = AubergineMachine::Computer.new(
+  columns: options[:columns],
+  rows: options[:rows]
+)
+computer.power_on.run(max_instructions: options[:instructions])
+
+if options[:input]
+  computer.terminal.enqueue_text(options[:input])
+  computer.run(max_instructions: options[:input_instructions])
+end
+
+snapshot = computer.snapshot
+
+puts "AubergineMachine Boot Output"
+puts
+puts computer.terminal.render
+puts
+puts format(
+  "PC=%04X A=%02X X=%02X Y=%02X SP=%02X STATUS=%02X instructions=%d cycles=%d",
+  snapshot[:program_counter],
+  snapshot[:accumulator],
+  snapshot[:register_x],
+  snapshot[:register_y],
+  snapshot[:stack_pointer],
+  snapshot[:status],
+  snapshot[:instruction_count],
+  snapshot[:cycle_count]
+)

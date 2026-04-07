@@ -1,0 +1,66 @@
+PATH
+  remote: ../6502
+  specs:
+    mos6502-workbench (1.0.0)
+      ratatui_ruby (~> 1.4)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.6.2)
+    json (2.19.3)
+    rake-compiler-dock (1.11.0)
+    ratatui_ruby (1.4.2)
+      rb_sys (~> 0.9)
+      rexml (~> 3.4)
+    ratatui_ruby (1.4.2-arm64-darwin-24)
+      rb_sys (~> 0.9)
+      rexml (~> 3.4)
+    ratatui_ruby (1.4.2-x86_64-linux)
+      rb_sys (~> 0.9)
+      rexml (~> 3.4)
+    rb_sys (0.9.126)
+      json (>= 2)
+      rake-compiler-dock (= 1.11.0)
+    rexml (3.4.4)
+    rspec (3.13.2)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.6)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.8)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.7)
+
+PLATFORMS
+  arm64-darwin-24
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  mos6502-workbench!
+  rspec (~> 3.13)
+
+CHECKSUMS
+  diff-lcs (1.6.2) sha256=9ae0d2cba7d4df3075fe8cd8602a8604993efc0dfa934cff568969efb1909962
+  json (2.19.3) sha256=289b0bb53052a1fa8c34ab33cc750b659ba14a5c45f3fcf4b18762dc67c78646
+  mos6502-workbench (1.0.0)
+  rake-compiler-dock (1.11.0) sha256=eab51f2cd533eb35cea6b624a75281f047123e70a64c58b607471bb49428f8c2
+  ratatui_ruby (1.4.2) sha256=cab36c0b2e71e40cc70ab24e0da0b16308be8fe72651fdb2f4bfea9bdd8026e9
+  ratatui_ruby (1.4.2-arm64-darwin-24) sha256=763c5e84ce15f0e2a6176d38e863aad50e76bfd9eeb0f9a9033254c69a7e6d56
+  ratatui_ruby (1.4.2-x86_64-linux) sha256=dccd5fbc309a973119cfd16a3245746df763a1d20d0d29bcef757d47fce9d810
+  rb_sys (0.9.126) sha256=ba958e0b8b4b89eeae0b3d24b64c809eb2c37e0ab0773a49e9b1c2e22c95aef8
+  rexml (3.4.4) sha256=19e0a2c3425dfbf2d4fc1189747bdb2f849b6c5e74180401b15734bc97b5d142
+  rspec (3.13.2) sha256=206284a08ad798e61f86d7ca3e376718d52c0bc944626b2349266f239f820587
+  rspec-core (3.13.6) sha256=a8823c6411667b60a8bca135364351dda34cd55e44ff94c4be4633b37d828b2d
+  rspec-expectations (3.13.5) sha256=33a4d3a1d95060aea4c94e9f237030a8f9eae5615e9bd85718fe3a09e4b58836
+  rspec-mocks (3.13.8) sha256=086ad3d3d17533f4237643de0b5c42f04b66348c28bf6b9c2d3f4a3b01af1d47
+  rspec-support (3.13.7) sha256=0640e5570872aafefd79867901deeeeb40b0c9875a36b983d85f54fb7381c47c
+
+BUNDLED WITH
+  4.0.8
